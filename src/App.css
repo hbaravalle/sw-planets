@@ -13,6 +13,7 @@ ul {
 body {
   font-family: "Inter";
   background-color: #111;
+  color: white;
 }
 
 button {
@@ -114,6 +115,11 @@ main .planet-detail table {
 
 main .planet-detail table tr td:nth-of-type(2) {
   text-align: right;
+}
+
+main .pagination {
+  width: 100%;
+  text-align: center;
 }
 
 footer {
