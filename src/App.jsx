@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Routes, Route, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import PlanetsList from "./PlanetsList";
 
 const queryClient = new QueryClient();
 
@@ -17,13 +16,7 @@ function App() {
           Planets
         </h1>
       </header>
-      {/* <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-      </Routes> */}
-      <main>
-        <PlanetsList />
-      </main>
+      <main>{<Outlet />}</main>
       <footer>Made with 💖 by the Front End Team</footer>
     </QueryClientProvider>
   );

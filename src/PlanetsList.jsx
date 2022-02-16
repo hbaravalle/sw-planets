@@ -3,13 +3,21 @@ import { useQuery } from "react-query";
 
 import CardPlanet from "./CardPlanet";
 
-let getPlanets = async () => {
-  let response = await fetch(`https://swapi.dev/api/planets/`);
+let getPlanets = async (page) => {
+  let response = await fetch(`https://swapi.dev/api/planets/?page=${page}`);
   return response.json();
 };
 
 export default function PlanetsList() {
-  let query = useQuery("PLANETS", () => getPlanets());
+  let [page, setPage] = useState(1);
+  let query = useQuery(["PLANETS", page], () => getPlanets(page), {
+    keepPreviousData: true,
+  });
+
+  let handleDecrementPage = () => setPage((old) => Math.max(1, old - 1));
+  let handleIncrementPage = () => setPage((old) => old + 1);
+
+  console.log(page);
 
   if (query.isLoading) {
     return <h2>Loading planets...</h2>;
@@ -26,9 +34,14 @@ export default function PlanetsList() {
             name={element.name}
             population={element.population}
             climate={element.climate}
+            planetId={index + 1}
           />
         );
       })}
+      <div class="pagination">
+        <button onClick={handleDecrementPage}>🠐 Prev</button>
+        <button onClick={handleIncrementPage}>Next 🠒</button>
+      </div>
     </>
   );
 }

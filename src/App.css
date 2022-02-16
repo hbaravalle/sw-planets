@@ -58,7 +58,7 @@ header h1 {
 
 header h1 img {
   width: 150px;
-  margin-right: 10px
+  margin-right: 10px;
 }
 
 main {
@@ -78,8 +78,10 @@ main .card-planet {
   color: white;
   border: 1px solid white;
   border-radius: 5px;
-  cursor: pointer;
+  text-decoration: none;
   transition: border 0.3s ease-in-out;
+  cursor: pointer;
+  outline: none;
 }
 
 main .card-planet:hover {
