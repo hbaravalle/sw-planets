@@ -11,9 +11,28 @@ let getPlanets = async (page) => {
 export default function PlanetsList() {
   let [page, setPage] = useState(1);
   let query = useQuery(["PLANETS", page], () => getPlanets(page), {
+    initialData: {
+      results: [
+        {
+          climate: "Arid",
+          name: "Tatooine",
+          population: "200000",
+        },
+        {
+          climate: "temperate",
+          name: "Alderaan",
+          population: 2000000000,
+        },
+        {
+          climate: "Temperate, tropical",
+          name: "Yavin IV",
+          population: 1000,
+        },
+      ],
+    },
     keepPreviousData: true,
   });
-
+  console.log(query);
   let handleDecrementPage = () => setPage((old) => Math.max(1, old - 1));
   let handleIncrementPage = () => setPage((old) => old + 1);
 
@@ -31,14 +50,14 @@ export default function PlanetsList() {
         return (
           <CardPlanet
             key={index + 1}
+            planetId={index + 1}
             name={element.name}
             population={element.population}
             climate={element.climate}
-            planetId={index + 1}
           />
         );
       })}
-      <div class="pagination">
+      <div className="pagination">
         <button onClick={handleDecrementPage}>🠐 Prev</button>
         <button onClick={handleIncrementPage}>Next 🠒</button>
       </div>
